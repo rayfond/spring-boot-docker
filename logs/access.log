@@ -1,0 +1,50 @@
+18:25:34.152 [main] INFO  n.bittx.h2.BootDockerApplication:55 - Starting BootDockerApplication on D9 with PID 18944 (/home/boot/.src/boot-docker/target/classes started by boot in /home/boot/.src/boot-docker)
+18:25:34.157 [main] INFO  n.bittx.h2.BootDockerApplication:651 - No active profile set, falling back to default profiles: default
+18:25:35.311 [main] WARN  io.undertow.websockets.jsr:68 - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+18:25:35.329 [main] INFO  io.undertow.servlet:364 - Initializing Spring embedded WebApplicationContext
+18:25:35.330 [main] INFO  o.s.web.context.ContextLoader:284 - Root WebApplicationContext: initialization completed in 1035 ms
+18:25:35.434 [main] INFO  c.zaxxer.hikari.HikariDataSource:110 - HikariPool-1 - Starting...
+18:25:35.600 [main] INFO  c.zaxxer.hikari.HikariDataSource:123 - HikariPool-1 - Start completed.
+18:25:35.871 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+18:25:36.026 [main] INFO  io.undertow:117 - starting server: Undertow - 2.0.27.Final
+18:25:36.030 [main] INFO  org.xnio:104 - XNIO version 3.3.8.Final
+18:25:36.036 [main] INFO  org.xnio.nio:55 - XNIO NIO Implementation Version 3.3.8.Final
+18:25:36.068 [main] INFO  o.s.b.w.e.u.UndertowServletWebServer:144 - Undertow started on port(s) 8080 (http) with context path ''
+18:25:36.072 [main] INFO  n.bittx.h2.BootDockerApplication:61 - Started BootDockerApplication in 2.862 seconds (JVM running for 5.933)
+18:25:36.143 [main] DEBUG n.b.h.d.m.O.insertOrderDetails:143 - ==>  Preparing: INSERT INTO order_detail (id,name,sku,c_time) VALUES (?, ?, ?, ?) , (?, ?, ?, ?) 
+18:25:36.168 [main] DEBUG n.b.h.d.m.O.insertOrderDetails:143 - ==> Parameters: 1(String), tv(String), ele(String), 2019-10-21T18:25:36.076915(LocalDateTime), 2(Integer), pvc(String), cons(String), 2019-10-21T18:25:36.076915(LocalDateTime)
+18:25:36.175 [main] DEBUG n.b.h.d.m.O.insertOrderDetails:143 - <==    Updates: 2
+18:25:36.180 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==>  Preparing: SELECT * FROM order_detail 
+18:25:36.189 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==> Parameters: 
+18:25:36.214 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - <==      Total: 2
+18:25:36.216 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==>  Preparing: SELECT * FROM order_detail 
+18:25:36.217 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==> Parameters: 
+18:25:36.218 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - <==      Total: 2
+18:27:10.959 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper:308 - Neither @ContextConfiguration nor @ContextHierarchy found for test class [net.bittx.h2.BootDockerApplicationTests], using SpringBootContextLoader
+18:27:10.968 [main] INFO  o.s.t.c.s.AbstractContextLoader:264 - Could not detect default resource locations for test class [net.bittx.h2.BootDockerApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+18:27:10.969 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils:83 - Could not detect default configuration classes for test class [net.bittx.h2.BootDockerApplicationTests]: BootDockerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:27:11.202 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper:235 - Found @SpringBootConfiguration net.bittx.h2.BootDockerApplication for test class net.bittx.h2.BootDockerApplicationTests
+18:27:11.409 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper:248 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+18:27:11.439 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper:177 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@61526469, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@274872f8, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@76ba13c, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@eb6449b, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7c351808, org.springframework.test.context.transaction.TransactionalTestExecutionListener@180e6ac4, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@42b64ab8, org.springframework.test.context.event.EventPublishingTestExecutionListener@7e985ce9, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@2a39fe6a, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@410ae9a3, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@319988b0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@d5ae57e, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@68759011]
+18:27:12.045 [main] INFO  n.b.h.BootDockerApplicationTests:55 - Starting BootDockerApplicationTests on D9 with PID 19233 (started by boot in /home/boot/.src/boot-docker)
+18:27:12.062 [main] INFO  n.b.h.BootDockerApplicationTests:651 - No active profile set, falling back to default profiles: default
+18:27:13.901 [main] INFO  c.zaxxer.hikari.HikariDataSource:110 - HikariPool-1 - Starting...
+18:27:14.085 [main] INFO  c.zaxxer.hikari.HikariDataSource:123 - HikariPool-1 - Start completed.
+18:27:14.867 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+18:27:15.342 [main] INFO  n.b.h.BootDockerApplicationTests:61 - Started BootDockerApplicationTests in 3.837 seconds (JVM running for 5.422)
+18:27:15.416 [main] DEBUG n.b.h.d.m.O.insertOrderDetails:143 - ==>  Preparing: INSERT INTO order_detail (id,name,sku,c_time) VALUES (?, ?, ?, ?) , (?, ?, ?, ?) 
+18:27:15.446 [main] DEBUG n.b.h.d.m.O.insertOrderDetails:143 - ==> Parameters: 1(String), tv(String), ele(String), 2019-10-21T18:27:15.348267(LocalDateTime), 2(Integer), pvc(String), cons(String), 2019-10-21T18:27:15.348267(LocalDateTime)
+18:27:15.448 [main] DEBUG n.b.h.d.m.O.insertOrderDetails:143 - <==    Updates: 2
+18:27:15.453 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==>  Preparing: SELECT * FROM order_detail 
+18:27:15.461 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==> Parameters: 
+18:27:15.484 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - <==      Total: 2
+18:27:15.486 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==>  Preparing: SELECT * FROM order_detail 
+18:27:15.487 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - ==> Parameters: 
+18:27:15.489 [main] DEBUG n.b.h.d.m.O.queryOrders:143 - <==      Total: 2
+18:27:16.159 [downHook] INFO  o.s.s.c.ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+18:27:16.162 [downHook] INFO  c.zaxxer.hikari.HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+18:27:16.168 [downHook] INFO  c.zaxxer.hikari.HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+18:29:34.502 [downHook] INFO  o.s.s.c.ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+18:29:34.503 [downHook] INFO  c.zaxxer.hikari.HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+18:29:34.511 [downHook] INFO  c.zaxxer.hikari.HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+18:29:34.514 [downHook] INFO  io.undertow:252 - stopping server: Undertow - 2.0.27.Final

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<configuration>-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>boot</contextName>
+
+    <!--please set logging.config in application.properties
+    e.g. logging.config=classpath:/config/logback.xml
+      path: /home/boot/
+    -->
+
+    <!--delegated by spring boot, please config logging.path in application.properties
+    e.g.	logging.path=/home/boot/
+    -->
+
+    <!--      WARING
+    Generating the file F / file 、caller class (C{length}/class{length}) 、line number (L / line) 、method name (M / method )
+    information is not particularly fast -->
+    <property name="LOG_PATH" value="logs"/>
+    <property name="CON_PATTERN"
+              value="%highlight([%-5level]) %d{yyMMdd HH:mm:ss.SSS} %boldYellow([%-9thread])  %logger{32}:%line - %msg%n"/>
+    <property name="DEF_PATTERN" value="%d{HH:mm:ss.SSS} [%.8thread] %-5level %logger{32}:%line - %msg%n"/>
+    <property name="TRC_PATTERN" value="%d{HH:mm:ss.SSS} [%.8thread] %-5level %logger{15} - [%-10X{TRC_ID}] %msg%n"/>
+    <property name="AUDIT_PTN" value="%d{HH:mm:ss.SSS} %-5level %logger{15} -%msg%n"/>
+
+    <!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CON_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ch.qos.logback.core.rolling.RollingFileAppender 文件日志输出 -->
+    <appender name="access" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/access.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/access-%d{yyyy-MM-dd}_%i.gz</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY:-0}</maxHistory>
+        </rollingPolicy>
+
+        <encoder charset="UTF-8">
+            <pattern>${DEF_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/err.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/err-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+
+        <encoder charset="UTF-8">
+            <pattern>${DEF_PATTERN}</pattern>
+        </encoder>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>5MB</maxFileSize>
+        </triggeringPolicy>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/err-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>21</maxIndex>
+        </rollingPolicy>
+
+    </appender>
+
+
+    <appender name="trace" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/trc.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/trc-%d{yyyy-MM-dd}_%i.gz</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY:-0}</maxHistory>
+        </rollingPolicy>
+
+        <encoder charset="UTF-8">
+            <pattern>${TRC_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志
+        只保留WARN和ERROR级别的event。为了保持所有的events，设置该值为0。
+        -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- BlockingQueue的最大容量，默认情况下，大小为256,更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+
+        <!--  提取调用者数据的代价是相当昂贵的。为了提升性能，默认情况下，当event被加入到queue时，
+        event关联的调用者数据不会被提取。默认情况下，只有"cheap"的数据，如线程名。
+        -->
+        <includeCallerData>false</includeCallerData>
+
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="trace"/>
+        <!--<appender-ref ref="monitor"/>-->
+    </appender>
+
+    <logger name="net.bittx.h2.dao.mapper" level="debug"/>
+
+    <root level="info">
+        <appender-ref ref="error"/>
+        <appender-ref ref="access"/>
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>
