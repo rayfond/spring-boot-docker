@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<assembly>
+    <!-- Define the project env, e.g. conf-cli-dev-2.0.0.RELEASE.tar.gz -->
+    <!--<id>${name}</id>-->
+    <id>jdk8</id>
+
+    <!-- Package for different type -->
+    <formats>
+        <!--<format>dir</format>-->
+        <format>tar.gz</format>
+        <!--<format>zip</format>-->
+    </formats>
+
+    <!--<archiveBaseDirectory>${project.artifactId}</archiveBaseDirectory>-->
+
+    <baseDirectory>${project.artifactId}</baseDirectory>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+
+
+    <fileSets>
+        <!-- 将src/bin目录下的所有文件输出到打包后的bin目录中 -->
+        <fileSet>
+            <directory>${build.directory}/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+
+        <!-- 指定输出target/classes中的配置文件到config目录中 -->
+        <fileSet>
+            <directory>${build.directory}/config</directory>
+            <outputDirectory>config</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+
+        <!--  指定输出target/logs到logs目录中 -->
+        <fileSet>
+            <directory>${build.directory}/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+
+        <!-- 将项目启动jar打包到boot目录中 -->
+        <fileSet>
+            <directory>${build.directory}</directory>
+            <outputDirectory>boot</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>${project.build.finalName}.jar</include>
+            </includes>
+        </fileSet>
+
+        <!-- 包含根目录下的文件 -->
+        <fileSet>
+            <directory>${basedir}</directory>
+            <includes>
+                <include>NOTICE</include>
+                <include>LICENSE</include>
+                <include>*.md</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
