@@ -55,7 +55,7 @@ fi
 }
 ## For spring boot BOOT-INF only
 # OPTS=" -Dloader.path=${APP_HOME}/lib,${APP_HOME}/config "
-OPTIONS='app.option vm.option'
+OPTIONS='vm.option app.option'
 for f in $OPTIONS; do
     getOption $f
     OPTS=${OPTS}${OPTION}
@@ -67,5 +67,4 @@ log=`pwd`"/logs/"
 mklog $log
 mklog $LOG_DIR
 
-echo "                                                  "
 echo "Enverionment is ready, starting application now..."
