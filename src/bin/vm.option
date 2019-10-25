@@ -1,0 +1,111 @@
+## JVM configuration
+
+################################################################
+## IMPORTANT: JVM heap size
+################################################################
+##
+## You should always set the min and max JVM heap
+## size to the same value. For example, to set
+## the heap to 4 GB, set:
+##
+## -Xms4g
+## -Xmx4g
+##
+##
+################################################################
+
+# Xms represents the initial size of total heap space
+# Xmx represents the maximum size of total heap space
+
+-Xms6g
+-Xmx6g
+
+################################################################
+## Expert settings
+################################################################
+##
+## All settings below this section are considered
+## expert settings. Don't tamper with them unless
+## you understand what you are doing
+##
+################################################################
+
+## GC configuration
+# -XX:+UseConcMarkSweepGC
+# -XX:CMSInitiatingOccupancyFraction=75
+# -XX:+UseCMSInitiatingOccupancyOnly
+
+## optimizations
+
+# pre-touch memory pages used by the JVM during initialization
+-XX:+AlwaysPreTouch
+
+## Debug Settings
+# -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1234
+
+## basic
+
+# explicitly set the stack size
+-Xss1m
+
+# set to headless, just in case
+-Djava.awt.headless=true
+
+# ensure UTF-8 encoding by default (e.g. filenames)
+-Dfile.encoding=UTF-8
+
+# use our provided JNA always versus the system one
+#-Djna.nosys=true
+
+# turn off a JDK optimization that throws away stack traces for common
+# exceptions because stack traces are important for debugging
+-XX:-OmitStackTraceInFastThrow
+
+#-Djava.io.tmpdir=${APP_TMPDIR}
+
+-XX:MaxDirectMemorySize=2G
+
+## heap dumps
+
+# generate a heap dump when an allocation from the Java heap fails
+# heap dumps are created in the working directory of the JVM
+-XX:+HeapDumpOnOutOfMemoryError
+
+# specify an alternative path for heap dumps; ensure the directory exists and
+# has sufficient space
+-XX:HeapDumpPath=logs/java_error_in_pid.hprof
+
+# specify an alternative path for JVM fatal error logs
+-XX:ErrorFile=logs/hs_err_pid%p.log
+
+## JDK 8 GC logging
+
+# -XX:+PrintGCDetails
+# -XX:+PrintGCDateStamps
+# -XX:+PrintTenuringDistribution
+# -XX:+PrintGCApplicationStoppedTime
+# -Xloggc:logs/gc.log
+# -XX:+UseGCLogFileRotation
+# -XX:NumberOfGCLogFiles=32
+# -XX:GCLogFileSize=64m
+# -XX:-UseGCOverheadLimit
+## Container needed, With Java 11 this is automatic by default.
+# -XX:+UnlockExperimentalVMOptions
+# -XX:+UseCGroupMemoryLimitForHeap
+
+
+#  Slow down the JIT later at the expense of the saved startup time
+-XX:TieredStopAtLevel=1 
+
+# JDK 9+ GC logging
+
+# -Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m
+
+# due to internationalization enhancements in JDK 9 Elasticsearch need to set the provider to COMPAT otherwise
+# time/date parsing will break in an incompatible way for some date patterns and locals
+
+# -Djava.locale.providers=COMPAT
+
+
+# temporary workaround for C2 bug with JDK 10 on hardware with AVX-512
+#10-:-XX:UseAVX=2
