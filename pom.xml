@@ -162,7 +162,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.1.1</version>
@@ -191,9 +191,9 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
-            <!-- <plugin>
+           <!--  <plugin>
                  <groupId>pl.project13.maven</groupId>
                  <artifactId>git-commit-id-plugin</artifactId>
                  <executions>
@@ -206,8 +206,8 @@
                  <configuration>
                      <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                  </configuration>
-             </plugin>-->
-
+             </plugin>
+-->
             <!--assembly package -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -265,8 +265,10 @@
                 <configuration>
                     <repository>bittx/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
-                    <contextDirectory>./</contextDirectory>
+                    <dockerfile>Dockerfile</dockerfile>
+                    <contextDirectory>.</contextDirectory>
                     <buildArgs>
+                        <APP_HOME>/${project.artifactId}</APP_HOME>
                         <JAR_FILE>/target/${project.build.finalName}.${pkg.format}</JAR_FILE>
                     </buildArgs>
                 </configuration>

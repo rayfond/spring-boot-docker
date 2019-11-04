@@ -14,6 +14,15 @@
     <baseDirectory>${project.artifactId}</baseDirectory>
     <includeBaseDirectory>true</includeBaseDirectory>
 
+
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+
     <fileSets>
         <!-- 将target/bin目录下的所有文件输出到打包后的bin目录中 -->
         <fileSet>

@@ -1,0 +1,13 @@
+.git/
+.idea/
+.mvn/
+.settings/
+.logs/*
+src/
+.classpath
+.gitignore
+.project
+*.iml
+*.xml
+HELP.md
+mvnw*
