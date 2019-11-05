@@ -1,6 +1,9 @@
 package net.bittx.h2.event;
 
+import net.bittx.h2.dao.mapper.ChildMapper;
 import net.bittx.h2.dao.mapper.OrderDetailMapper;
+import net.bittx.h2.dao.mapper.ParentMapper;
+import net.bittx.h2.service.TestSvc;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -26,9 +29,16 @@ public class ApplicationEventInit {
 
     @Resource
     OrderDetailMapper mapper;
+    @Resource
+    ChildMapper childMapper;
 
-    @EventListener(ApplicationStartedEvent.class)
+    @Resource
+    ParentMapper parentMapper;
+
+    //@EventListener(ApplicationStartedEvent.class)
     public void run() {
+
+        parentMapper.insertParent();
         //log.info(">>> ApplicationStartedEvent fired!");
         try {
             Map<String,Object> m1 = new HashMap<String,Object>(){{
@@ -53,10 +63,21 @@ public class ApplicationEventInit {
 
             list = mapper.queryOrders();
             System.out.println(list.size());
+
+
+            childMapper.insetChild();
         } catch (Exception e) {
             e.printStackTrace();
             //log.error(e.getMessage(),e);
         }
         //log.info(">>> ApplicationStartedEvent ended. ");
+    }
+
+
+    @Resource
+    TestSvc testSvc;
+    @EventListener(ApplicationStartedEvent.class)
+    public void rerun(){
+        testSvc.testAspect();
     }
 }

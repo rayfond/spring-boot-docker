@@ -9,13 +9,13 @@ CREATE TABLE child (
 );
 
 INSERT INTO parent (parentName)
-VALUES ('parent-1'),
-       ('parent-2'),
-       ('parent-3');
+VALUES ('parent-init-1'),
+       ('parent-init-2'),
+       ('parent-init-3');
 INSERT INTO child (childName, parentId)
-VALUES ('child-1', 1),
-       ('child-2', 1),
-       ('child-3', 1);
+VALUES ('child-init-1', 1),
+       ('child-init-2', 1),
+       ('child-init-3', 1);
 
 CREATE TABLE order_detail(
   id   INT PRIMARY KEY AUTO_INCREMENT,
