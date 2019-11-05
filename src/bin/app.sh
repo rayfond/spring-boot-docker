@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh 
 set -oe pipefail
 
 DIRNAME=`which dirname`

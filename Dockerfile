@@ -27,7 +27,7 @@ WORKDIR /${APP_HOME}
 # ENTRYPOINT ["/bin/sh","./bin/start.sh"]
 
 ### bittx.sh ###
-ENTRYPOINT ["/bin/sh","./bin/app.sh"]
+ENTRYPOINT ["./bin/app.sh"]
 CMD ["start"]
 ################
 

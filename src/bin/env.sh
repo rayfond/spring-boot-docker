@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 APP_NAME=boot-docker
 BUILD_JAR=boot-docker-1.0.0.jar
