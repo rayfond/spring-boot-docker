@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
+set -oe pipefail
 
 DIRNAME=`which dirname`
 BIN_PATH=$( cd `${DIRNAME} $0`; pwd -P )
 APP_HOME=$(${DIRNAME} ${BIN_PATH})
 . $BIN_PATH/env.sh
+
+# if command starts with an option, prepend java
+if [ "${1:0:1}" = '-' ]; then
+    set -- java "$@"
+fi    
+
 
 # $0 is a script name,
 # $1,S2,S3 etc are passed arguments
@@ -26,12 +33,18 @@ case "$CMD" in
     "start" )
     # we can modify files here, using ENV variables passed in
     # "docker create" command. It can't be done during build process.
-    #echo "db:$DATABASE_ADDRESS" >> /conf/config.xml
-    export NODE_ENV=prod
+    # echo "db:$DATABASE_ADDRESS" >> /conf/config.xml
+    export BOOT_ENV=prod
     # exec npm start
-    java ${OPTS} -jar ${APP_HOME}/boot/${BUILD_JAR} >/dev/null 2>&1 &
-    echo "Application is started."
-    wait
+
+    echo "Logging system starting now ..." >> ${APP_HOME}/logs/access.log
+    # Continuously provide logs so that 'docker logs' can produce them
+    tail -F "${APP_HOME}/logs/access.log" &
+    exec java ${OPTS} -jar ${APP_HOME}/boot/${BUILD_JAR} >/dev/null 2>&1 &
+    pid="$!"
+    trap "echo Received trapped signal, beginning showdown...;" KILL TERM HUP INT EXIT;
+    echo "Application is started, it's PID is ${pid}"
+    wait ${pid}
 
     ;;
 

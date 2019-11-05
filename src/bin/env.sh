@@ -3,7 +3,6 @@
 APP_NAME=boot-docker
 BUILD_JAR=boot-docker-1.0.0.jar
 
-
 JAVA=`which java`
 UNAME=`which uname`
 GREP=`which egrep`
@@ -37,8 +36,6 @@ if [ ${CLZ_VERSION} \< ${GE_JDK8} ]; then
     exit 1
 fi
 
-LOG_DIR=${APP_HOME}"/logs/"
-
 mklog(){
 if [ ! -d $1 ]; then
     mkdir -p $1
@@ -63,6 +60,7 @@ done
 
 # GC log
 log=`pwd`"/logs/"
+LOG_DIR=${APP_HOME}"/logs/"
 
 mklog $log
 mklog $LOG_DIR

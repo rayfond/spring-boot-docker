@@ -33,5 +33,5 @@ CMD ["start"]
 
 
 #ENTRYPOINT ["./bin/start.sh"]
-# CMD ["bin/sh","-c","bin/start.sh"]
+#CMD ["bin/sh","-c","bin/start.sh"]
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
