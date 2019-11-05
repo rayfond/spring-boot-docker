@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh -e
 # 注意项目中所有的脚本都使用sh 标准，可以在linux, unix系统上直接运行，当使用bash shell语法检查工具检查时，
 # 可能会造成脚本只能在linux上运行的风险！
 

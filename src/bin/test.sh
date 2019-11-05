@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh -e
 DIRNAME=`which dirname`
 
 BIN_PATH=$( cd `${DIRNAME} $0`; pwd -P )

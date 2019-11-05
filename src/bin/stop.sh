@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh -e
 
 APP_NAME=@project.name@
 BUILD_JAR="@project.build.finalName@.jar"
