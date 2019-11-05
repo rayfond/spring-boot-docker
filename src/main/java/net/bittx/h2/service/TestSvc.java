@@ -38,6 +38,8 @@ public class TestSvc {
             int y = 1/x;
             System.out.println(">>>>");
         } catch (Exception e) {
+            // rollback the entire transaction, so the bellow method call:
+            // orderDetailMapper.insertOrderDetails will be canceled
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             System.out.println(e.getMessage());
         }
