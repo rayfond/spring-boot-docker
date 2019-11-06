@@ -4,7 +4,7 @@ import net.bittx.h2.dao.mapper.ChildMapper;
 import net.bittx.h2.dao.mapper.OrderDetailMapper;
 import net.bittx.h2.dao.mapper.ParentMapper;
 import net.bittx.h2.service.TestSvc;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.boot.context.event.*;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -78,6 +78,8 @@ public class ApplicationEventInit {
     TestSvc testSvc;
     @EventListener(ApplicationStartedEvent.class)
     public void rerun(){
+        System.out.println();
         testSvc.testAspect();
     }
+
 }
