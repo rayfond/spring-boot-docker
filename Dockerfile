@@ -26,10 +26,11 @@ WORKDIR /${APP_HOME}
 # CMD ["/bin/sh","./bin/test.sh"]
 # ENTRYPOINT ["/bin/sh","./bin/start.sh"]
 
-### bittx.sh ###
+### entry-point.sh ###
 ENTRYPOINT ["./bin/docker-entrypoint.sh"]
+# ENTRYPOINT ["./bin/app2.sh"]
+# CMD ["start"]
 ################
-
 
 #ENTRYPOINT ["./bin/start.sh"]
 #CMD ["bin/sh","-c","bin/start.sh"]
