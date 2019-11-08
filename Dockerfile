@@ -21,17 +21,49 @@ LABEL maintainer = "Asin Liu  <codezone@163.com>"
 VOLUME /tmp
 ARG APP_HOME
 ARG JAR_FILE
+ENV TZ=Asia/Shanghai
+RUN set -eux; \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime; \
+    echo $TZ > /etc/timezone
+    
 ADD ${JAR_FILE} /
 WORKDIR /${APP_HOME}
-# CMD ["/bin/sh","./bin/test.sh"]
-# ENTRYPOINT ["/bin/sh","./bin/start.sh"]
+
+CMD ["./bin/docker-entrypoint.sh"]
+
+
+
+
+#ARG UID=1000
+#ARG GID=1000
+## User name
+#ARG UN=ray
+## Group name
+#ARG GN=ray
+#ARG HOME=/home/${UN}
+
+
+
+
+
+
+
+# RUN set -eux; \
+#     addgroup --gid ${GID} ${GN}; \
+#     adduser -u ${UID} ${UN} -DSG ${GN} -h ${HOME} -s /bin/sh; \
+#     chown -R ray:ray ${HOME}
+    
+# ADD ${JAR_FILE} /home/${UN}/
+
+# RUN set -eux; \
+#     chown -R ray:ray ${HOME}
+# USER ray
+# WORKDIR /home/ray/${APP_HOME}
 
 ### entry-point.sh ###
-ENTRYPOINT ["./bin/docker-entrypoint.sh"]
+# ENTRYPOINT ["./bin/docker-entrypoint.sh"]
+#CMD ["./bin/docker-entrypoint.sh"]
 # ENTRYPOINT ["./bin/app2.sh"]
 # CMD ["start"]
 ################
-
-#ENTRYPOINT ["./bin/start.sh"]
-#CMD ["bin/sh","-c","bin/start.sh"]
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]

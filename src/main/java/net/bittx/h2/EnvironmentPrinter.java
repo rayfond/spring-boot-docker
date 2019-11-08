@@ -20,8 +20,8 @@ public class EnvironmentPrinter implements CommandLineRunner, EnvironmentAware {
 
     @Override
     public void run(String... args) throws Exception{
-        System.out.println();
-        System.out.println("================== ARGUMENTS ==================");
+
+        logger.info("\n================== ARGUMENTS ==================\n");
 
         if(args != null && args.length > 0){
             for(String arg  : args){
@@ -35,10 +35,9 @@ public class EnvironmentPrinter implements CommandLineRunner, EnvironmentAware {
         ConfigurableEnvironment confEnv = (ConfigurableEnvironment) environment;
 
         logger.info("\n================== SYSTEM PROPERTIES ==================\n");
-        logger.info("\n================== SYSTEM PROPERTIES ==================\n");
         printMap(confEnv.getSystemProperties());
 
-        System.out.println("\n================== SYSTEM PROPERTIES ==================\n");
+        logger.info("\n================== SYSTEM ENVIRONMENTS ==================\n");
         printMap(confEnv.getSystemEnvironment());
     }
 

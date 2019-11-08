@@ -79,7 +79,7 @@ public class ApplicationEventInit {
     @EventListener(ApplicationStartedEvent.class)
     public void rerun(){
         System.out.println();
-        testSvc.testAspect();
+        // testSvc.testAspect();
     }
 
 }

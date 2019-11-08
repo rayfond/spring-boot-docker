@@ -1,5 +1,7 @@
 ## JVM configuration
 
+
+
 ################################################################
 ## IMPORTANT: JVM heap size
 ################################################################
@@ -17,8 +19,8 @@
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
 
--Xms2g
--Xmx2g
+# -Xms2g
+# -Xmx2g
 
 ################################################################
 ## Expert settings
@@ -49,21 +51,23 @@
 -Xss1m
 
 # set to headless, just in case
--Djava.awt.headless=true
+# -Djava.awt.headless=true
 
 # ensure UTF-8 encoding by default (e.g. filenames)
+
 -Dfile.encoding=UTF-8
 
 # use our provided JNA always versus the system one
 #-Djna.nosys=true
 
-# turn off a JDK optimization that throws away stack traces for common
-# exceptions because stack traces are important for debugging
--XX:-OmitStackTraceInFastThrow
+## turn off a JDK optimization that throws away stack traces for common
+## exceptions because stack traces are important for debugging
+
+# -XX:-OmitStackTraceInFastThrow
 
 #-Djava.io.tmpdir=${APP_TMPDIR}
 
--XX:MaxDirectMemorySize=2G
+#-XX:MaxDirectMemorySize=2G
 
 ## heap dumps
 
@@ -89,9 +93,13 @@
 # -XX:NumberOfGCLogFiles=32
 # -XX:GCLogFileSize=64m
 # -XX:-UseGCOverheadLimit
-## Container needed, With Java 11 this is automatic by default.
+
+## Version above 8u131 Container needed, With Java 11 this is automatic by default.
+
 # -XX:+UnlockExperimentalVMOptions
 # -XX:+UseCGroupMemoryLimitForHeap
+# -XX:MaxRAMFraction=1
+
 
 
 #  Slow down the JIT later at the expense of the saved startup time
@@ -101,7 +109,7 @@
 
 # -Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m
 
-# due to internationalization enhancements in JDK 9 Elasticsearch need to set the provider to COMPAT otherwise
+# due to internationalization enhancements in JDK 9 Application need to set the provider to COMPAT otherwise
 # time/date parsing will break in an incompatible way for some date patterns and locals
 
 # -Djava.locale.providers=COMPAT
