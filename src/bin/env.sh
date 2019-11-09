@@ -82,7 +82,9 @@ if [ -z "$RUNC" ]; then
     done
 fi
 
-OPTS="-XshowSettings:vm " "${OPTS}"
+
+# OPTS="-XshowSettings:vm ${OPTS}"
+OPTS=" -XshowSettings:vm"${OPTS}
 
 # GC log
 GC_LOG_DIR=`pwd`"/logs/"
@@ -92,6 +94,9 @@ mkd $GC_LOG_DIR
 mkd $APP_LOG_DIR
 
 echo "Environment is ready, starting application now..."
-echo
-echo "java options is : ${OPTS}"
-echo
+echo "Java options:"
+
+for i in $OPTS
+do 
+    echo "    "$i
+done 
