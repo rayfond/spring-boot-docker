@@ -66,9 +66,11 @@
         <fileSet>
             <directory>${basedir}</directory>
             <includes>
+                <include>*.md</include>
                 <include>NOTICE</include>
                 <include>LICENSE</include>
-                <include>*.md</include>
+                <include>Dockerfile</include>
+                <include>.dockerignore</include>
             </includes>
         </fileSet>
     </fileSets>
