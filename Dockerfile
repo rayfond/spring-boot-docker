@@ -6,7 +6,7 @@ WORKDIR /ray
 
 COPY lib ./lib
 COPY bin ./bin
-COPY boot ./boot
 COPY config ./config
+COPY boot ./boot
 
 CMD ["./bin/docker-entrypoint.sh"]

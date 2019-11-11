@@ -1,7 +1,14 @@
 #!/bin/sh
+
+ctx=$1
+ver=$2
+fmt=$3
+
 cd target
-tar xf boot-docker-1.0.0.tar.gz
+tar xf $ctx-$ver.$fmt
 
-cd boot-docker
+cd $1
 
-docker build -t boot .
+docker build -t bittx/$ctx:v$ver .
+cd ..
+rm -rf $ctx

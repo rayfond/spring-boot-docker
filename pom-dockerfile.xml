@@ -216,7 +216,7 @@
                     <!--<finalName>${project.artifactId}</finalName>-->
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
-                        <descriptor>src/main/assembly/assembly-without-dependency.xml</descriptor>
+                        <descriptor>src/assembly/assembly-without-dependency.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>

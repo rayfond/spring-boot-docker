@@ -131,10 +131,6 @@
     <build>
         <plugins>
 
-            <!--<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -161,7 +157,7 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>
+           <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.1.1</version>
@@ -213,10 +209,10 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <!--<finalName>${project.artifactId}</finalName>-->
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
-                        <descriptor>src/main/assembly/assembly-without-dependency.xml</descriptor>
+                        <descriptor>src/assembly/assembly-without-dependency.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
@@ -231,24 +227,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.5</version>
-                <configuration>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
-                </configuration>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.46</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.8</version>
@@ -259,7 +237,10 @@
                         <configuration>
                             <tasks>
                                 <exec executable="/bin/bash">
-                                    <arg value="docker_build.sh" />
+                                    <arg value="${basedir}/docker_build.sh"/>
+                                    <arg value="${project.artifactId}"/>
+                                    <arg value="${project.version}"/>
+                                    <arg value="${pkg.format}"/>
                                 </exec>
                             </tasks>
                         </configuration>
