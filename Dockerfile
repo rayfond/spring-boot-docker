@@ -9,4 +9,7 @@ COPY bin ./bin
 COPY config ./config
 COPY boot ./boot
 
-CMD ["./bin/docker-entrypoint.sh"]
+ENTRYPOINT ["./bin/docker-entrypoint.sh"]
+
+EXPOSE 8080
+CMD [ "start" ]
