@@ -121,6 +121,7 @@ public class EvtAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = attributes.getRequest();
 
+        System.out.println(returningValue.toString());
         Class targetClass = jp.getTarget().getClass();
 
         Signature signature = jp.getSignature();

@@ -6,6 +6,9 @@ import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("a")
@@ -36,5 +39,16 @@ public class A {
     @RequestMapping("f")
     public String f(String code, String value,int index){
         return "Test @Evt with params!";
+    }
+
+    @Evt
+    @RequestMapping("g")
+    public Object g(String code, String value,int index){
+        Map<String, Object> rtn = new HashMap<>();
+
+        rtn.put("msg", "Test @Evt with params");
+        rtn.put("uid", 1000L);
+
+        return rtn;
     }
 }
