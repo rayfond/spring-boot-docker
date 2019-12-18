@@ -1,7 +1,9 @@
 #!/bin/sh
 
-APP_NAME=boot-docker
-BUILD_JAR=boot-docker-1.0.0.jar
+#APP_NAME=boot-docker
+#BUILD_JAR=boot-docker-1.0.0.jar
+APP_NAME=@project.name@
+BUILD_JAR=@project.build.finalName@.jar
 
 JAVA=`which java`
 UNAME=`which uname`

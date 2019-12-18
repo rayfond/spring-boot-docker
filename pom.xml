@@ -20,6 +20,7 @@
         <pkg.format>tar.gz</pkg.format>
         <ibatis.starter.version>2.1.0</ibatis.starter.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
+        <boot.profile>dev</boot.profile>
     </properties>
 
     <repositories>
@@ -29,6 +30,23 @@
         </repository>
     </repositories>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                 <boot.profile>dev</boot.profile>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <boot.profile>prod</boot.profile>
+            </properties>
+        </profile>
+    </profiles>
     <dependencies>
 
         <dependency>
@@ -135,7 +153,6 @@
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -156,6 +173,8 @@
                         <exclude>*.xml</exclude>
                         <exclude>*.yml</exclude>
                         <exclude>*.properties</exclude>
+                        <exclude>config/</exclude>
+                        <exclude>init</exclude>
                         <exclude>mappers/</exclude>
                         <exclude>sql/</exclude>
                     </excludes>
@@ -231,7 +250,6 @@
                 </executions>
             </plugin>
 
-<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -256,7 +274,55 @@
                     </execution>
                 </executions>
             </plugin>
--->
+
+
+           <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>8.22</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>checkstyle-validation</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <configLocation>src/checkstyle/checkstyle.xml</configLocation>
+                            &lt;!&ndash;<suppressionsLocation>src/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>&ndash;&gt;
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <propertyExpansion>main.basedir=${basedir}</propertyExpansion>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>nohttp-checkstyle-validation</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <configLocation>src/checkstyle/nohttp-checkstyle.xml</configLocation>
+                            &lt;!&ndash;<suppressionsLocation>src/checkstyle/nohttp-checkstyle-suppressions.xml</suppressionsLocation>&ndash;&gt;
+                            <propertyExpansion>main.basedir=${basedir}</propertyExpansion>
+                            <encoding>UTF-8</encoding>
+                            <sourceDirectories>${basedir}</sourceDirectories>
+                            <includes>**/*</includes>
+                            <excludes>**/.git/**/*,**/target/**/,**/.flattened-pom.xml,**/*.class,**/spring-boot-gradle-plugin/build/**,**/spring-boot-gradle-plugin/bin/**</excludes>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                    </execution>
+                </executions>
+            </plugin>-->
 
         </plugins>
 
@@ -272,19 +338,26 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <excludes>
-                    <exclude>sql/</exclude>
                     <exclude>generator*</exclude>
                 </excludes>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-                <!--<excludes>
-                    <exclude>sql/</exclude>
+                <excludes>
+                    <exclude>init/</exclude>
+                    <exclude>config/</exclude>
                     <exclude>generator*</exclude>
-                </excludes>-->
+                </excludes>
                 <targetPath>${project.build.directory}/config</targetPath>
             </resource>
+
+            <resource>
+                <directory>src/main/resources/config</directory>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/config</targetPath>
+            </resource>
+
             <resource>
                 <directory>src/bin</directory>
                 <filtering>true</filtering>

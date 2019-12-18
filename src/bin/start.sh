@@ -7,6 +7,9 @@ BIN_PATH=$( cd `${DIRNAME} $0`; pwd -P )
 APP_HOME=$(${DIRNAME} ${BIN_PATH})
 . $BIN_PATH/env.sh
 #echo "nohup java ${OPTS} -jar ${APP_HOME}/boot/${BUILD_JAR} > nohubp.out 2>&1 & "
+
+# Force using spring.profiles.active `prod`
+# nohup java ${OPTS} -jar -Dspring.profiles.active=prod ${APP_HOME}/boot/${BUILD_JAR} > nohup.out 2>&1 &
 nohup java ${OPTS} -jar ${APP_HOME}/boot/${BUILD_JAR} > nohup.out 2>&1 &
 
 echo "Starting application now ..."

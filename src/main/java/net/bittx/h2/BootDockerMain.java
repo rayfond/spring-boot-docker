@@ -11,11 +11,10 @@ public class BootDockerMain {
     private static final Logger logger = LoggerFactory.getLogger(BootDockerMain.class);
     public static void main(String[] args) {
         Runtime.getRuntime().addShutdownHook(
-                new Thread(() ->{
+                new Thread(() -> {
                     System.out.println("执行钩子线程>>>> sout");
                     logger.error("执行钩子线程>>> logger");
-                } ));
+                }));
         SpringApplication.run(BootDockerMain.class, args);
     }
-
 }
