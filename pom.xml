@@ -174,7 +174,7 @@
                         <exclude>*.yml</exclude>
                         <exclude>*.properties</exclude>
                         <exclude>config/</exclude>
-                        <exclude>init</exclude>
+                        <exclude>init/</exclude>
                         <exclude>mappers/</exclude>
                         <exclude>sql/</exclude>
                     </excludes>
