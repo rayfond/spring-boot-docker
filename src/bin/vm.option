@@ -53,6 +53,8 @@
 # set to headless, just in case
 # -Djava.awt.headless=true
 
+-Djava.security.egd=file:/dev/./urandom
+
 # ensure UTF-8 encoding by default (e.g. filenames)
 
 -Dfile.encoding=UTF-8
