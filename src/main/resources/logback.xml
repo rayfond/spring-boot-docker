@@ -17,7 +17,7 @@
     information is not particularly fast -->
     <property name="LOG_PATH" value="logs"/>
     <property name="CON_PATTERN"
-              value="%highlight([%-5level]) %d{yyMMdd HH:mm:ss.SSS} %boldYellow([%-9thread])  %logger{32}:%line - %msg%n"/>
+              value="%highlight([%-1level]) %d{yyMMdd HH:mm:ss.SSS} %boldYellow([%-9thread])  %logger{32}:%line - %msg%n"/>
     <property name="DEF_PATTERN" value="%d{HH:mm:ss.SSS} [%.8thread] %-5level %logger{32}:%line - %msg%n"/>
     <property name="TRC_PATTERN" value="%d{HH:mm:ss.SSS} [%.8thread] %-5level %logger{15} - [%-10X{TRC_ID}] %msg%n"/>
     <property name="AUDIT_PTN" value="%d{HH:mm:ss.SSS} %-5level %logger{15} -%msg%n"/>
