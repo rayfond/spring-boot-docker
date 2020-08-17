@@ -59,8 +59,7 @@
 
 -Dfile.encoding=UTF-8
 
-# use our provided JNA always versus the system one
-#-Djna.nosys=true
+
 
 ## turn off a JDK optimization that throws away stack traces for common
 ## exceptions because stack traces are important for debugging
@@ -95,7 +94,7 @@
 # -XX:+PrintGCApplicationStoppedTime
 # -Xloggc:logs/gc.log
 # -XX:+UseGCLogFileRotation
-# -XX:NumberOfGCLogFiles=32
+# -XX:NumberOfGCLogFiles=8
 # -XX:GCLogFileSize=64m
 # -XX:-UseGCOverheadLimit
 

@@ -14,6 +14,18 @@
 -Dio.netty.recycler.maxCapacity.default=0
 -Dio.netty.recycler.maxCapacityPerThread=0
 
+## visualvm connection,for remote monitor, need to reset the firewall config
+#-Dcom.sun.management.jmxremote
+#-Djava.rmi.server.hostname=47.110.252.60
+#-Dcom.sun.management.jmxremote.port=6666
+#-Dcom.sun.management.jmxremote.rmi.port=6666
+#-Dcom.sun.management.jmxremote.ssl=false
+#-Dcom.sun.management.jmxremote.authenticate=false
+
+
+## Use our provided JNA always versus the system one
+#-Djna.nosys=true
+
 # log4j 2
 -Dlog4j.shutdownHookEnabled=false
 -Dlog4j2.disable.jmx=true
