@@ -1,13 +1,13 @@
 package net.bittx.h2;
 
 //import jdk.internal.misc.Signal;
+//import sun.misc.SignalHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import sun.misc.SignalHandler;
 
 
 @SpringBootApplication
@@ -23,8 +23,8 @@ public class BootDockerMain {
         });*/
         Runtime.getRuntime().addShutdownHook(
                 new Thread(() -> {
-                    System.out.println("执行钩子线程>>>> sout");
-                    logger.error("执行钩子线程>>> logger");
+                    System.out.println("Hook thread >>>> sout");
+                    logger.error("Hook thread >>> logger");
                 }));
         ConfigurableApplicationContext context = SpringApplication.run(BootDockerMain.class, args);
         ApplicationArguments arguments = context.getBean(ApplicationArguments.class);

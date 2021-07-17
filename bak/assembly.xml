@@ -6,14 +6,14 @@
     <!-- Package for different type -->
     <formats>
         <!--<format>dir</format>-->
-        <format>${pkg.format}</format>
+        <format>tar.gz</format>
         <!--<format>zip</format>-->
     </formats>
 
-    <!--<baseDirectory>${project.build.finalName}</baseDirectory>-->
+    <!--<archiveBaseDirectory>${project.artifactId}</archiveBaseDirectory>-->
+
     <baseDirectory>${project.artifactId}</baseDirectory>
     <includeBaseDirectory>true</includeBaseDirectory>
-
 
     <dependencySets>
         <dependencySet>
@@ -23,8 +23,9 @@
         </dependencySet>
     </dependencySets>
 
+
     <fileSets>
-        <!-- 将target/bin目录下的所有文件输出到打包后的bin目录中 -->
+        <!-- 将src/bin目录下的所有文件输出到打包后的bin目录中 -->
         <fileSet>
             <directory>${build.directory}/bin</directory>
             <outputDirectory>bin</outputDirectory>
@@ -55,22 +56,13 @@
             </includes>
         </fileSet>
 
-        <!-- 将target/lib目录下的所有文件输出到打包后的lib目录中 -->
-        <fileSet>
-            <directory>${build.directory}/lib</directory>
-            <outputDirectory>lib</outputDirectory>
-            <fileMode>0755</fileMode>
-        </fileSet>
-
         <!-- 包含根目录下的文件 -->
         <fileSet>
             <directory>${basedir}</directory>
             <includes>
-                <include>*.md</include>
                 <include>NOTICE</include>
                 <include>LICENSE</include>
-                <include>Dockerfile</include>
-                <include>.dockerignore</include>
+                <include>*.md</include>
             </includes>
         </fileSet>
     </fileSets>

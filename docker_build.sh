@@ -1,14 +1,19 @@
 #!/bin/sh
+# Three params
 
-ctx=$1
-ver=$2
-fmt=$3
+# ${project.artifactId}
+ctx=${1:-"boot-docker"}
+
+#${project.version}
+ver=${2:-"1.0.0"}
+
+# ${pkg.format}
+fmt=${3:-"tar.gz"}
 
 cd target
+
 tar xf $ctx-$ver.$fmt
 
-cd $1
+docker build -t bittx/$ctx:v$ver $ctx
 
-docker build -t bittx/$ctx:v$ver .
-cd ..
 rm -rf $ctx

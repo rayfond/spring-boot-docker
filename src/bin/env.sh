@@ -1,4 +1,4 @@
-  #!/bin/sh
+#!/bin/sh
 
 #APP_NAME=boot-docker
 #BUILD_JAR=boot-docker-1.0.0.jar
@@ -30,8 +30,8 @@ fi
 
 # OS_TYPE=`"$UNAME" -s`
 
-JAVA_HOME=`${JAVA} -XshowSettings:properties -version 2>&1 | sed '/^[[:space:]]*java\.home/!d;s/^[[:space:]]*java\.home[[:space:]]*=[[:space:]]*//'`
-CLZ_VERSION=`${JAVA} -XshowSettings:properties -version 2>&1 | sed '/java.class.version/!d' | awk '{print $3}'`
+JAVA_HOME=$(${JAVA} -XshowSettings:properties -version 2>&1 | sed '/^[[:space:]]*java\.home/!d;s/^[[:space:]]*java\.home[[:space:]]*=[[:space:]]*//')
+CLZ_VERSION=$(${JAVA} -XshowSettings:properties -version 2>&1 | sed '/java.class.version/!d' | awk '{print $3}')
 GE_JDK8=52.0
 
 if [ ${CLZ_VERSION} \< ${GE_JDK8} ]; then
@@ -45,9 +45,9 @@ TV=10.0.0
 CONTAINER=docker
 RUNC=""
 
-JV=`${JAVA} -XshowSettings:properties -version 2>&1 | sed '/java.version =/!d' | awk '{print $3}'`
+JV=$(${JAVA} -XshowSettings:properties -version 2>&1 | sed '/java.version =/!d' | awk '{print $3}')
 
-for i in $@
+for i in "$@"
 do
     [ "$i" = "$CONTAINER" ] && { RUNC="T"; break; }
 done
@@ -78,7 +78,7 @@ getOptions(){
 if [ -z "$RUNC" ]; then
     echo "Host env detected... "
     OPTION_FILES='vm.option app.option'
-    for f in "$OPTION_FILES" ; do
+    for f in $OPTION_FILES ; do
         getOptions $f
         OPTS=${OPTS}${OPTION}
     done

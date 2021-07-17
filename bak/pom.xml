@@ -17,11 +17,10 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <pkg.format>tar.gz</pkg.format>
         <ibatis.starter.version>2.1.0</ibatis.starter.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <boot.profile>dev</boot.profile>
-        <assembly.file>assembly.xml</assembly.file>
-        <docker.file>Dockerfile</docker.file>
     </properties>
 
     <repositories>
@@ -35,8 +34,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <boot.profile>dev</boot.profile>
-                <pkg.format>zip</pkg.format>
+                 <boot.profile>dev</boot.profile>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -45,20 +43,10 @@
         <profile>
             <id>prod</id>
             <properties>
-                <!--
-                for application.properties
-                spring.profiles.active=@boot.profile@
-                -->
                 <boot.profile>prod</boot.profile>
-                <!-- package to tar.gz before docker build.
-                use `ADD ${JAR_FILE} /` to Dockerfile,
-                it will be automatically decompressed
-                -->
-                <pkg.format>tar.gz</pkg.format>
             </properties>
         </profile>
     </profiles>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -160,6 +148,8 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>
@@ -191,19 +181,51 @@
             </plugin>
 
            <!-- <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
+                        <id>analyze</id>
                         <goals>
-                            <goal>revision</goal>
+                            <goal>analyze-only</goal>
                         </goals>
+                        <configuration>
+                            <failOnWarning>true</failOnWarning>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-                </configuration>
             </plugin>-->
+
+           <!--  <plugin>
+                 <groupId>pl.project13.maven</groupId>
+                 <artifactId>git-commit-id-plugin</artifactId>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>revision</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+                 <configuration>
+                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                 </configuration>
+             </plugin>
+-->
             <!--assembly package -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -213,7 +235,7 @@
                     <finalName>${project.artifactId}-${project.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
-                        <descriptor>src/assembly/${assembly.file}</descriptor>
+                        <descriptor>src/assembly/assembly-without-dependency.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
@@ -251,6 +273,56 @@
                     </execution>
                 </executions>
             </plugin>
+
+
+           <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>8.22</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>checkstyle-validation</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <configLocation>src/checkstyle/checkstyle.xml</configLocation>
+                            &lt;!&ndash;<suppressionsLocation>src/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>&ndash;&gt;
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <propertyExpansion>main.basedir=${basedir}</propertyExpansion>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>nohttp-checkstyle-validation</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <configLocation>src/checkstyle/nohttp-checkstyle.xml</configLocation>
+                            &lt;!&ndash;<suppressionsLocation>src/checkstyle/nohttp-checkstyle-suppressions.xml</suppressionsLocation>&ndash;&gt;
+                            <propertyExpansion>main.basedir=${basedir}</propertyExpansion>
+                            <encoding>UTF-8</encoding>
+                            <sourceDirectories>${basedir}</sourceDirectories>
+                            <includes>**/*</includes>
+                            <excludes>**/.git/**/*,**/target/**/,**/.flattened-pom.xml,**/*.class,**/spring-boot-gradle-plugin/build/**,**/spring-boot-gradle-plugin/bin/**</excludes>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                    </execution>
+                </executions>
+            </plugin>-->
+
         </plugins>
 
         <resources>
@@ -272,7 +344,7 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <excludes>
-                    <!--<exclude>init/</exclude>-->
+                    <exclude>init/</exclude>
                     <exclude>config/</exclude>
                     <exclude>generator*</exclude>
                 </excludes>

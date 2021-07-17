@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <assembly>
-    <!-- Define the project env, e.g. conf-cli-dev-2.0.0.RELEASE.tar.gz -->
+    <!-- Define the project env, e.g. spring-boot-docker-2.0.0.RELEASE.tar.gz -->
     <id>jdk8</id>
 
     <!-- Package for different type -->
     <formats>
         <!--<format>dir</format>-->
-        <format>tar.gz</format>
+        <format>${pkg.format}</format>
         <!--<format>zip</format>-->
     </formats>
 
     <!--<archiveBaseDirectory>${project.artifactId}</archiveBaseDirectory>-->
-
+    <!--<baseDirectory>${project.build.finalName}</baseDirectory>-->
     <baseDirectory>${project.artifactId}</baseDirectory>
     <includeBaseDirectory>true</includeBaseDirectory>
+
 
     <dependencySets>
         <dependencySet>
@@ -23,9 +24,8 @@
         </dependencySet>
     </dependencySets>
 
-
     <fileSets>
-        <!-- 将src/bin目录下的所有文件输出到打包后的bin目录中 -->
+        <!-- 将target/bin目录下的所有文件输出到打包后的bin目录中 -->
         <fileSet>
             <directory>${build.directory}/bin</directory>
             <outputDirectory>bin</outputDirectory>
@@ -56,13 +56,22 @@
             </includes>
         </fileSet>
 
+        <!-- 将target/lib目录下的所有文件输出到打包后的lib目录中 -->
+        <fileSet>
+            <directory>${build.directory}/lib</directory>
+            <outputDirectory>lib</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+
         <!-- 包含根目录下的文件 -->
         <fileSet>
             <directory>${basedir}</directory>
             <includes>
+                <include>*.md</include>
                 <include>NOTICE</include>
                 <include>LICENSE</include>
-                <include>*.md</include>
+                <include>Dockerfile</include>
+                <include>.dockerignore</include>
             </includes>
         </fileSet>
     </fileSets>

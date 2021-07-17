@@ -46,9 +46,15 @@ public class EnvironmentPrinter implements CommandLineRunner, EnvironmentAware {
         map.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey())
-                .forEach(o-> System.out.println(Str.rightPad(o.getKey(), padding," ")
+                .forEach(
+                        o-> System.out.println(Str.rightPad(o.getKey(), padding," ")
                         + "： "
                         + o.getValue().toString()
-                ));
+                        )
+                       /* o->
+                        logger.info("{}:{}",Str.rightPad(o.getKey(),padding,""),
+                                o.getValue().toString())*/
+
+                );
     }
 }

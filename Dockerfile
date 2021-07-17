@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 LABEL maintainer = "Asin Liu  <codezone@163.com>"
-VOLUME /tmp
+# VOLUME /tmp
 
 WORKDIR /ray
 
@@ -9,7 +9,12 @@ COPY bin ./bin
 COPY config ./config
 COPY boot ./boot
 
-ENTRYPOINT ["./bin/docker-entrypoint.sh"]
+ENV TZ=Asia/Shanghai
+RUN set -eux; \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime; \
+    echo $TZ > /etc/timezone
+    #&& mkdir logs
 
+ENTRYPOINT ["./bin/entrypoint.sh"]
 EXPOSE 8080
-CMD [ "start" ]
+CMD ["start"]
