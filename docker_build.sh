@@ -12,8 +12,10 @@ fmt=${3:-"tar.gz"}
 
 cd target
 
-tar xf $ctx-$ver.$fmt
+tar xf "$ctx-$ver.$fmt"
 
-docker build -t bittx/$ctx:v$ver $ctx
+# mv "$ctx"/boot "$ctx"/.boot
+
+docker build -t "bittx/$ctx:v$ver" $ctx
 
 rm -rf $ctx
