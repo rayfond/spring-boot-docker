@@ -236,14 +236,14 @@
                         <id>package</id>
                         <phase>package</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <exec executable="/bin/bash">
                                     <arg value="${basedir}/docker_build.sh"/>
                                     <arg value="${project.artifactId}"/>
                                     <arg value="${project.version}"/>
                                     <arg value="${pkg.format}"/>
                                 </exec>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
